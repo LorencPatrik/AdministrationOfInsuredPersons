@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="cs-cz" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head th:replace="~{fragments/layout.html :: head}"></head>
+    <body>
+        <header th:replace="~{fragments/layout.html :: header}"></header>
+        <article>
+            <header>
+                <h1>Něco málo o mě:</h1>
+            </header>
+            <section>
+                <p>Jmenuji se Patrik Lorenc a rozhodl jsem se po 24. letech práce řidiče kamiónu, splnit si svůj dávný sen a stát se programátorem</p>
+                <img th:src="@{/images/java.png}" alt="logo Java" width="250" />
+            </section>
+        </article>
+        <footer th:replace="~{fragments/layout.html :: footer}"></footer>
+    </body>
+</html>

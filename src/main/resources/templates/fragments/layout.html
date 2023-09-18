@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="cs-cz" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head th:fragment="head">
+        <meta charset="UTF-8"/>
+        <meta name="description" content="Závěrečná práce itnetwork ve Spring boot. Správa pojištěných."/>
+        <meta name="keywords" content="pojištění, správa pojištěných, spring, závěrečná práce, itnetwork"/>
+        <meta name="author" content="Lorenc Patrik"/>
+        <title>Spring - pojištění</title>
+        <link rel="stylesheet" th:href="@{/styles/bootstrap.min.css}" type="text/css"/>
+        <link rel="stylesheet" th:href="@{/styles/styl.css}" type="text/css"/>
+        <script th:src="@{/scripts/bootstrap.min.js}"></script>
+        <link rel="shortcut icon" th:href="@{/images/spring-boot.svg}"/>
+    </head>
+    <body>
+        <header th:fragment="header">
+            <nav class="navbar navbar-expand-md navbar-light bg-light">
+                <a th:href="@{/}" class="navbar-brand">
+                    <img class="d-inline-block align-top" th:src="@{/images/SpringBoot.png}" width="100" height="100" alt="logo Spring Boot" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-items">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="menu-items">
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a th:href="@{/}" class="nav-link">O aplikaci</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/aboutMe}" class="nav-link">O mě</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/insureds}" class="nav-link">Pojištění</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <footer th:fragment="footer" class="fixed-bottom">
+            Vytvořil &copy;Lorenc Patrik 2023
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    min-height: 100vh;
+ }
+footer {
+
+  width: 100%;
+  background-color: lightgrey;
+  text-align: center;
+}
