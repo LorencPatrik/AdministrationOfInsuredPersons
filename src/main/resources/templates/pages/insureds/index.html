@@ -4,12 +4,15 @@
     <body>
         <header th:replace="~{fragments/layout.html :: header}"></header>
         <article>
+            <div class="py-2 alert alert-success" th:text="${success}" th:if="${success}"></div>
+            <div class="py-2 alert alert-error" th:text="${error}" th:if="${error}"></div>
             <header>
                 <h1>Správa Pojištěných:</h1>
             </header>
             <section>
                 <p>Zde budou výpisy a formuláře pro správu pojištěných osob.</p>
             </section>
+        <button type="button"><a th:href="@{/insureds/create}">Vytvořit</a></button>
         </article>
         <footer th:replace="~{fragments/layout.html :: footer}"></footer>
     </body>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="cs-cz" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head th:replace="~{fragments/layout.html :: head}"></head>
+    <body>
+        <header th:replace="~{fragments/layout.html :: header}"></header>
+        <article>
+            <header>
+                <h1>Nastala chyba:</h1>
+            </header>
+            <section>
+                <h2>Chyba:</h2>
+                <pre th:text="${trace}"></pre>
+            </section>
+        </article>
+        <footer th:replace="~{fragments/layout.html :: footer}"></footer>
+    </body>
+</html>

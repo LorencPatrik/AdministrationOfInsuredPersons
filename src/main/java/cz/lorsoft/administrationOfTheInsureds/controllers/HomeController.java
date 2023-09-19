@@ -13,8 +13,4 @@ public class HomeController {
     public String renderAboutMe() {
         return "pages/home/aboutMe";
     }
-    @GetMapping("/insureds")
-    public String renderInsureds(){
-        return "pages/home/insureds";
-    }
 }
