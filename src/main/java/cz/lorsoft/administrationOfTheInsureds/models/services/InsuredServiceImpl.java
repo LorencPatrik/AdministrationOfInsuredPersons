@@ -7,6 +7,9 @@ import cz.lorsoft.administrationOfTheInsureds.models.dto.InsuredMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class InsuredServiceImpl implements InsuredService{
     @Autowired
@@ -17,5 +20,24 @@ public class InsuredServiceImpl implements InsuredService{
     public void create(InsuredDTO insuredDTO) {
         InsuredEntity newInsured = insuredMapper.toEntity(insuredDTO);
         insuredRepository.save(newInsured);
+    }
+
+    @Override
+    public List<InsuredDTO> getAll() {
+        List<InsuredDTO> insureds = new ArrayList<>();
+        Iterable<InsuredEntity> fetchedInsureds = insuredRepository.findAll();
+        for (InsuredEntity insuredEntity : fetchedInsureds){
+            InsuredDTO mappedInsured = insuredMapper.toDTO(insuredEntity);
+            insureds.add(mappedInsured);
+        }
+        return insureds;
+    }
+
+    @Override
+    public InsuredDTO getById(long insuredId) {
+        InsuredEntity fetchedInsured = insuredRepository
+                .findById(insuredId)
+                .orElseThrow();
+        return insuredMapper.toDTO(fetchedInsured);
     }
 }
