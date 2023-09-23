@@ -1,6 +1,7 @@
 package cz.lorsoft.administrationOfTheInsureds.controllers;
 
 import cz.lorsoft.administrationOfTheInsureds.models.dto.InsuredDTO;
+import cz.lorsoft.administrationOfTheInsureds.models.dto.InsuredMapper;
 import cz.lorsoft.administrationOfTheInsureds.models.services.InsuredService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import java.util.List;
 public class InsuredController {
     @Autowired
     private InsuredService insuredService;
+    @Autowired
+    private InsuredMapper insuredMapper;
     @GetMapping({"/", ""})
     public String renderInsureds(Model model) {
         List<InsuredDTO> insureds = insuredService.getAll();
@@ -41,5 +44,19 @@ public class InsuredController {
         InsuredDTO insured = insuredService.getById(insuredId);
         model.addAttribute("insured", insured);
         return "pages/insureds/detail";
+    }
+    @GetMapping("edit/{insuredId}")
+    public String renderEditForm(@PathVariable long insuredId, @ModelAttribute InsuredDTO insuredDTO){
+        InsuredDTO fetchedInsured = insuredService.getById(insuredId);
+        insuredMapper.updateInsuredDTO(fetchedInsured, insuredDTO);
+        return "pages/insureds/edit";
+    }
+    @PostMapping("edit/{insuredId}")
+    public String editInsured(@PathVariable long insuredId, @ModelAttribute @Valid InsuredDTO insuredDTO, BindingResult result){
+        if(result.hasErrors())
+            return renderEditForm(insuredId, insuredDTO);
+        insuredDTO.setInsuredId(insuredId);
+        insuredService.edit(insuredDTO);
+        return "redirect:/insureds";
     }
 }

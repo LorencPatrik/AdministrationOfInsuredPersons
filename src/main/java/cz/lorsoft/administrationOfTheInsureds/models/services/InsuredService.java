@@ -8,4 +8,5 @@ public interface InsuredService {
     void create(InsuredDTO insuredDTO);
     List<InsuredDTO> getAll();
     InsuredDTO getById(long insuredId);
+    void edit(InsuredDTO insuredDTO);
 }

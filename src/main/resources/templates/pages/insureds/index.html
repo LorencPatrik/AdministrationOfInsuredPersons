@@ -14,7 +14,8 @@
                     <li class="list-group-item list-group-item-action" th:each = "insured: ${insureds}"> <!-- insured každá jedna DTO: ${kolekce předaná přes model - její název v úvozovkách} -->
                         <div class="row">
                             <span class="col-2"><a th:href="@{'/insureds/' + ${insured.insuredId}}" th:text="${insured.surName} + ' ' + ${insured.name}"></a></span>
-                            <span class="col-8" th:text="${insured.streetAndNumber} + ' ' + ${insured.city}"></span>
+                            <span class="col-8" th:text="${insured.streetAndNumber} + ', ' + ${insured.city}"></span>
+                            <button class="col-2" type="button"><a th:href="@{/insureds/edit/} + ${insured.insuredId}">Editovat</a></button>
                         </div>
                     </li>
                 </ul>
