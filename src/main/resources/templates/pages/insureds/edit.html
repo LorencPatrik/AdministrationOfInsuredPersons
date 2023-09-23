@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="cs-cz" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head th:replace="~{fragments/layout.html :: head}"></head>
+    <body>
+        <header th:replace="~{fragments/layout.html :: header}"></header>
+            <article>
+                <div id="centrovac">
+                    <header>
+                    <h1>Editace pojištěného:</h1>
+                    </header>
+                    <section>
+                        <form class="row p-5" method="post" th:action="@{'/insureds/edit/' + ${insuredId}}" th:object="${insuredDTO}">
+                            <div th:replace="~{fragments/layout.html :: createAndEditForm}"></div>
+                        </form>
+                    </section>
+                </div>
+            </article>       
+        <footer th:replace="~{fragments/layout.html :: footer}"></footer>
+    </body>
+</html>

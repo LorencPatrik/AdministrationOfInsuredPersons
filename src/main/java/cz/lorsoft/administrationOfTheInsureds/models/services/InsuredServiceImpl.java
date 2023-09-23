@@ -4,6 +4,7 @@ import cz.lorsoft.administrationOfTheInsureds.data.entities.InsuredEntity;
 import cz.lorsoft.administrationOfTheInsureds.data.repositories.InsuredRepository;
 import cz.lorsoft.administrationOfTheInsureds.models.dto.InsuredDTO;
 import cz.lorsoft.administrationOfTheInsureds.models.dto.InsuredMapper;
+import cz.lorsoft.administrationOfTheInsureds.models.exceptions.InsuredNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,12 +45,17 @@ public class InsuredServiceImpl implements InsuredService{
         InsuredEntity fetchedInsured = getInsuredOrThrow(insuredDTO.getInsuredId());
         insuredMapper.updateInsuredEntity(insuredDTO, fetchedInsured);
         insuredRepository.save(fetchedInsured);
+    }
 
+    @Override
+    public void delete(long insuredId) {
+        InsuredEntity fetchedEntity = getInsuredOrThrow(insuredId);
+        insuredRepository.delete(fetchedEntity);
     }
 
     private InsuredEntity getInsuredOrThrow(long insuredId){
         return insuredRepository
                 .findById(insuredId)
-                .orElseThrow();
+                .orElseThrow(InsuredNotFoundException:: new);
     }
 }

@@ -5,7 +5,7 @@
         <header th:replace="~{fragments/layout.html :: header}"></header>
         <article class="container-fluid">
             <div class="py-2 alert alert-success" th:text="${success}" th:if="${success}"></div>
-            <div class="py-2 alert alert-error" th:text="${error}" th:if="${error}"></div>
+            <div class="py-2 alert alert-danger" th:text="${error}" th:if="${error}"></div>
             <header>
                 <h1>Správa Pojištěných:</h1>
             </header>
@@ -15,7 +15,8 @@
                         <div class="row">
                             <span class="col-2"><a th:href="@{'/insureds/' + ${insured.insuredId}}" th:text="${insured.surName} + ' ' + ${insured.name}"></a></span>
                             <span class="col-8" th:text="${insured.streetAndNumber} + ', ' + ${insured.city}"></span>
-                            <button class="col-2" type="button"><a th:href="@{/insureds/edit/} + ${insured.insuredId}">Editovat</a></button>
+                            <button class="col-1" type="button"><a th:href="@{/insureds/edit/} + ${insured.insuredId}">Editovat</a></button>
+                            <button class="col-1" type="button"><a th:href="@{'/insureds/delete/' + ${insured.insuredId}}">Smazat</a></button>
                         </div>
                     </li>
                 </ul>
