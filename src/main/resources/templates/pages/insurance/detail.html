@@ -7,24 +7,17 @@
             <div class="py-2 alert alert-success" th:text="${success}" th:if="${success}"></div>
             <div class="py-2 alert alert-error" th:text="${error}" th:if="${error}"></div>
             <header>
-                <h1>Výpis pojištěného:</h1>
+                <h1>Výpis pojištění:</h1>
             </header>
             <section>
                 <ul class="py-3 list-group">
                     <li class="list-group-item">
-                        <h2 th:text="${insured.name} + ' ' + ${insured.surName}"></h2>
-                        <div class="row">
-                            <span class="col-2" th:text="${insured.streetAndNumber}"></span>
-                            <span class="col-8" th:text="${insured.email}"></span>
-                        </div>
-                        <div class="row">
-                            <span class="col-2" th:text="${insured.city}"></span>
-                            <span class="col-8" th:text="${insured.phone}"></span>
-                        </div>
-                        <span th:text="${insured.zipCode}"></span>
+                        <h2 class="py-3" th:text="${oneInsurance.typeOfInsurance} + ', ' + ${oneInsurance.variantInsurance}"></h2>
+                        <p th:text="'Nabízená hodnota plnění: ' + ${oneInsurance.amountFrom} + ' - ' + ${oneInsurance.amountTo}"></p>
+                        <p th:text="'Cena pojištění: ' + ${oneInsurance.priceFrom} + ' - ' + ${oneInsurance.priceTo}"></p>
                     </li>
                 </ul>
-                <button type="button"><a th:href="@{/insureds/}">Zpět</a></button> 
+                <button type="button"><a th:href="@{/insurance/}">Zpět</a></button> 
             </section>
         </article>
         <footer th:replace="~{fragments/layout.html :: footer}"></footer>

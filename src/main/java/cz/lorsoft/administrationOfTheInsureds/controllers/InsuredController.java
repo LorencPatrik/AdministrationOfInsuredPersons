@@ -28,7 +28,7 @@ public class InsuredController {
         return "redirect:/insureds";
     }
 
-    @GetMapping({"/", ""})
+    @GetMapping("/")
     public String renderInsureds(Model model) {
         List<InsuredDTO> insureds = insuredService.getAll();
         model.addAttribute("insureds", insureds);
@@ -45,7 +45,7 @@ public class InsuredController {
         insuredService.create(insuredDTO);
         redirectAttributes.addFlashAttribute("success", "Vytvořen nový pojištěný.");
 //        return "pages/insureds/index"; // funguje, ale nevypíše flash messages protože to nejde přes controller kde je uložena hodnota redirectAttributes
-        return "redirect:/insureds"; // volání adresy controlleru nikoliv vracení samotné stránky view...
+        return "redirect:/insureds/"; // volání adresy controlleru nikoliv vracení samotné stránky view...
     }
     @GetMapping("{insuredId}")
     public String renderDetail (@PathVariable long insuredId, Model model){
@@ -60,18 +60,18 @@ public class InsuredController {
         return "pages/insureds/edit";
     }
     @PostMapping("edit/{insuredId}")
-    public String editInsured(@PathVariable long insuredId, @ModelAttribute @Valid InsuredDTO insuredDTO, BindingResult result, RedirectAttributes redirectAttributes){
+    public String InsuredEditFormHandle(@PathVariable long insuredId, @ModelAttribute @Valid InsuredDTO insuredDTO, BindingResult result, RedirectAttributes redirectAttributes){
         if(result.hasErrors())
             return renderEditForm(insuredId, insuredDTO);
         insuredDTO.setInsuredId(insuredId);
         insuredService.edit(insuredDTO);
         redirectAttributes.addFlashAttribute("success", "Data pojištěného upravena.");
-        return "redirect:/insureds";
+        return "redirect:/insureds/";
     }
     @GetMapping("delete/{insuredId}")
     public String deleteInsured(@PathVariable long insuredId, RedirectAttributes redirectAttributes){
         insuredService.delete(insuredId);
         redirectAttributes.addFlashAttribute("success", "Pojištěný vymazán.");
-        return "redirect:/insureds";
+        return "redirect:/insureds/";
     }
 }

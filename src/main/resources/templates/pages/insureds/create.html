@@ -3,17 +3,15 @@
     <head th:replace="~{fragments/layout.html :: head}"></head>
     <body>
         <header th:replace="~{fragments/layout.html :: header}"></header>
-            <article>
-                <div id="centrovac">
-                    <header>
-                    <h1>Nový pojištěnec</h1>
-                    </header>
-                    <section>
-                        <form class="row p-5" method="post" th:action="@{/insureds/create}" th:object="${insuredDTO}">
-                            <div th:replace="~{fragments/layout.html :: createAndEditForm}"></div>
-                        </form>
-                    </section>
-                </div>
+            <article class="px-5 py-2">
+                <header>
+                <h1>Nový pojištěnec</h1>
+                </header>
+                <section>
+                    <form class="py-3 row" method="post" th:action="@{/insureds/create}" th:object="${insuredDTO}">
+                        <div th:replace="~{fragments/layout.html :: createAndEditFormInsured}"></div>
+                    </form>
+                </section>
             </article>       
         <footer th:replace="~{fragments/layout.html :: footer}"></footer>
     </body>

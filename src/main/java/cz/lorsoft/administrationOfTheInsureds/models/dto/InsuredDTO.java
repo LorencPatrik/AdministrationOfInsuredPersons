@@ -1,10 +1,12 @@
 package cz.lorsoft.administrationOfTheInsureds.models.dto;
 
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -25,7 +27,11 @@ public class InsuredDTO {
 
 //    @NotBlank(message = "Vyplňte datum narození")
 //    @NotNull(message = "Vyplňte datum narození")
-//    private Date dateOfBrith;
+//    private LocalDate dateOfBrith;
+//    @Future(message = "Vyplňte datum začátku pojištění (nelze uzavřít zpětně...")
+//    private LocalDate dateFrom;
+//    @Future(message = "Vyplňte datum konce pojištění")
+//    private LocalDate dateTo;
     @NotBlank(message = "Vyplňte tel. číslo")
     @NotNull(message = "Vyplňte tel. číslo")
     @Size(max = 16, min = 6, message = "Tel. číslo je příliš krátké nebo dlouhé 6 - 16 zanků")

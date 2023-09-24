@@ -5,11 +5,11 @@
         <header th:replace="~{fragments/layout.html :: header}"></header>
             <article class="px-5 py-2">
                 <header>
-                <h1>Editace pojištěného:</h1>
+                <h1>Editace pojištění:</h1>
                 </header>
                 <section>
-                    <form class="row py-3" method="post" th:action="@{'/insureds/edit/' + ${insuredId}}" th:object="${insuredDTO}">
-                        <div th:replace="~{fragments/layout.html :: createAndEditFormInsured}"></div>
+                    <form class="row py-3" method="post" th:action="@{'/insurance/edit/' + ${insuranceId}}" th:object="${insuranceDTO}">
+                        <div th:replace="~{fragments/layout.html :: createAndEditFormInsurance}"></div>
                     </form>
                 </section>
             </article>       

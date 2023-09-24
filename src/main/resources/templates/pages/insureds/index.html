@@ -3,14 +3,14 @@
     <head th:replace="~{fragments/layout.html :: head}"></head>
     <body>
         <header th:replace="~{fragments/layout.html :: header}"></header>
-        <article class="container-fluid">
+        <article class="px-5 py-2 container-fluid">
             <div class="py-2 alert alert-success" th:text="${success}" th:if="${success}"></div>
             <div class="py-2 alert alert-danger" th:text="${error}" th:if="${error}"></div>
             <header>
                 <h1>Správa Pojištěných:</h1>
             </header>
             <section>
-                <ul class="list-group">
+                <ul class="py-3 list-group">
                     <li class="list-group-item list-group-item-action" th:each = "insured: ${insureds}"> <!-- insured každá jedna DTO: ${kolekce předaná přes model - její název v úvozovkách} -->
                         <div class="row">
                             <span class="col-2"><a th:href="@{'/insureds/' + ${insured.insuredId}}" th:text="${insured.surName} + ' ' + ${insured.name}"></a></span>
