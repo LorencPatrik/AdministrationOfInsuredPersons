@@ -22,11 +22,6 @@ public class InsuredController {
     private InsuredService insuredService;
     @Autowired
     private InsuredMapper insuredMapper;
-    @ExceptionHandler({InsuredNotFoundException.class})
-    public String handleInsuredNotFoundException(RedirectAttributes redirectAttributes){
-        redirectAttributes.addFlashAttribute("error", "Pojištěný nenalezen...");
-        return "redirect:/insureds";
-    }
 
     @GetMapping("/")
     public String renderInsureds(Model model) {
@@ -72,6 +67,11 @@ public class InsuredController {
     public String deleteInsured(@PathVariable long insuredId, RedirectAttributes redirectAttributes){
         insuredService.delete(insuredId);
         redirectAttributes.addFlashAttribute("success", "Pojištěný vymazán.");
+        return "redirect:/insureds/";
+    }
+    @ExceptionHandler({InsuredNotFoundException.class})
+    public String handleInsuredNotFoundException(RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("error", "Pojištěný nenalezen...");
         return "redirect:/insureds/";
     }
 }

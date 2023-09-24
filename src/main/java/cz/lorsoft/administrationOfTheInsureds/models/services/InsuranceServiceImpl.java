@@ -56,7 +56,7 @@ public class InsuranceServiceImpl implements InsuranceService{
     private InsuranceEntity getInsuranceOrThrow(long insuranceId){
         return insuranceRepository
                 .findById(insuranceId)
-                .orElseThrow(InsuranceNotFoundException :: new);
+                .orElseThrow(InsuranceNotFoundException::new);
     }
 
 }

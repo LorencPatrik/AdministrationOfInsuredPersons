@@ -56,6 +56,6 @@ public class InsuredServiceImpl implements InsuredService{
     private InsuredEntity getInsuredOrThrow(long insuredId){
         return insuredRepository
                 .findById(insuredId)
-                .orElseThrow(InsuredNotFoundException:: new);
+                .orElseThrow(InsuredNotFoundException::new);
     }
 }

@@ -21,11 +21,7 @@ public class InsuranceController {
     private InsuranceService insuranceService;
     @Autowired
     private InsuranceMapper insuranceMapper;
-    @ExceptionHandler({InsuranceNotFoundException.class})
-    public String handleInsuranceNotFoundException(RedirectAttributes redirectAttributes){
-        redirectAttributes.addFlashAttribute("error", "Pojištěný nenalezen...");
-        return "redirect:/insurance";
-    }
+
     @GetMapping("/")
     public String renderInsurance(Model model){
         List<InsuranceDTO> allInsurance = insuranceService.getAll();
@@ -69,6 +65,11 @@ public class InsuranceController {
     public String deleteInsurance(@PathVariable long insuranceId, RedirectAttributes redirectAttributes){
         insuranceService.delete(insuranceId);
         redirectAttributes.addFlashAttribute("success", "Pojištění vymazáno.");
+        return "redirect:/insurance/";
+    }
+    @ExceptionHandler({InsuranceNotFoundException.class})
+    public String handleInsuranceNotFoundException(RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("error", "Pojištění nenalezeno...");
         return "redirect:/insurance/";
     }
 }
