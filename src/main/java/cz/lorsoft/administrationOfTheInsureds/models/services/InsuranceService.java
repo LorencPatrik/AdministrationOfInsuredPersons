@@ -10,5 +10,6 @@ public interface InsuranceService {
     InsuranceDTO getById(long insuranceId);
     void edit(InsuranceDTO insuranceDTO);
     void delete(long insuranceId);
+    List<String> getAllUnique();
 }
 

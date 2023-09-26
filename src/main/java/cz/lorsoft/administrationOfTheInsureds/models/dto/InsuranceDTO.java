@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class InsuranceDTO {
-    private Long insuranceId;
+    private long insuranceId;
     @NotBlank(message = "Vyplňte kategorii pojištění")
     @NotNull(message = "Vyplňte kategorii pojištění")
     @Size(max = 32, message = "Název kategorie je příliš dlouhý")

@@ -10,7 +10,7 @@ import lombok.Setter;
 public class InsuranceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long insuranceId;
+    private long insuranceId;
     @Column(nullable = false)
     private String typeOfInsurance;
     @Column(nullable = false)

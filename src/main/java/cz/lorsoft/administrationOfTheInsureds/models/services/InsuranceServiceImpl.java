@@ -35,6 +35,21 @@ public class InsuranceServiceImpl implements InsuranceService{
     }
 
     @Override
+    public List<String> getAllUnique() {
+        List<String> allUniqueTypeOfInsurance = new ArrayList<>();
+        Iterable<InsuranceEntity> fetchedAllInsurance = insuranceRepository.findAll();
+        String control = "";
+        for (InsuranceEntity insuranceEntity : fetchedAllInsurance){
+            InsuranceDTO mappedInsurance = insuranceMapper.toDTO(insuranceEntity);
+            if (!mappedInsurance.getTypeOfInsurance().equals(control)) {
+                allUniqueTypeOfInsurance.add(mappedInsurance.getTypeOfInsurance());
+                control = mappedInsurance.getTypeOfInsurance();
+            }
+        }
+        return allUniqueTypeOfInsurance;
+    }
+
+    @Override
     public InsuranceDTO getById(long insuranceId) {
         InsuranceEntity fetchedInsurance = getInsuranceOrThrow(insuranceId);
         return insuranceMapper.toDTO(fetchedInsurance);

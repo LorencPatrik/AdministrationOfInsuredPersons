@@ -1,8 +1,10 @@
 package cz.lorsoft.administrationOfTheInsureds.controllers;
 
+import cz.lorsoft.administrationOfTheInsureds.models.dto.InsuranceDTO;
 import cz.lorsoft.administrationOfTheInsureds.models.dto.InsuredDTO;
 import cz.lorsoft.administrationOfTheInsureds.models.dto.InsuredMapper;
 import cz.lorsoft.administrationOfTheInsureds.models.exceptions.InsuredNotFoundException;
+import cz.lorsoft.administrationOfTheInsureds.models.services.InsuranceService;
 import cz.lorsoft.administrationOfTheInsureds.models.services.InsuredService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ import java.util.jar.Attributes;
 public class InsuredController {
     @Autowired
     private InsuredService insuredService;
+    @Autowired
+    private InsuranceService insuranceService;
     @Autowired
     private InsuredMapper insuredMapper;
 
@@ -69,9 +73,21 @@ public class InsuredController {
         redirectAttributes.addFlashAttribute("success", "Pojištěný vymazán.");
         return "redirect:/insureds/";
     }
+    @GetMapping("addInsurance/{insuredId}")
+    public String addInsuranceToInsured(@PathVariable long insuredId, Model model){
+        InsuredDTO insured = insuredService.getById(insuredId);
+        model.addAttribute("insured", insured);
+        List<String> allUniqueInsuranceStrings = insuranceService.getAllUnique();
+        List<InsuranceDTO> allInsuranceDTO = insuranceService.getAll();
+        model.addAttribute("allUniqueInsuranceStrings", allUniqueInsuranceStrings);
+        model.addAttribute("allInsuranceDTO", allInsuranceDTO);
+        return "pages/insureds/addInsurance";
+    }
+
     @ExceptionHandler({InsuredNotFoundException.class})
     public String handleInsuredNotFoundException(RedirectAttributes redirectAttributes){
         redirectAttributes.addFlashAttribute("error", "Pojištěný nenalezen...");
         return "redirect:/insureds/";
     }
+
 }

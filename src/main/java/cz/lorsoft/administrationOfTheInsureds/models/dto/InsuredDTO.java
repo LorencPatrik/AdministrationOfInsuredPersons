@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Data
 public class InsuredDTO {
-    private Long insuredId;
+    private long insuredId;
     @NotBlank(message = "Vyplňte jméno")
     @NotNull(message = "Vyplňte jméno")
     @Size(max = 16, message = "Jméno je příliš dlouhé")
