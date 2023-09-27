@@ -25,21 +25,17 @@
                     </li>
                 </ul>
                 <h1>Vyberte si druh a variantu pojištění:</h1>
-
-                   <p><a class="btn btn-outline-dark mx-1" th:each="oneString, state : ${allUniqueInsuranceStrings}" th:text="${oneString}" data-bs-toggle="collapse" th:href="@{#collapseExample} + ${state.index}" role="button"></a></p>
-
-                  <div class="collapse mb-3" th:each="oneString, state : ${allUniqueInsuranceStrings}" th:id="'collapseExample' + ${state.index}">
-                    <div class="card card-body" >
-                        <div th:each="oneDTO : ${allInsuranceDTO}" th:if="${oneDTO.typeOfInsurance} == ${oneString}" th:text="${oneDTO.variantInsurance}">
-                        </div>
-                      
+                <div class="accordion" th:each="oneString, state : ${allUniqueInsuranceStrings}" id="accordionMenu">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" th:text="${oneString}" data-bs-toggle="collapse" th:data-bs-target="'#collapseNo' + ${state.index}" aria-expanded="false" th:aria-controls="'collapseNo' + ${state.index}"></button>
+                        </h2>
+                        <ul th:id="'collapseNo' + ${state.index}" class="accordion-collapse collapse pt-3" data-bs-parent="#accordionMenu">
+                            <li class="accordion-body p-0" th:each="oneDTO : ${allInsuranceDTO}" th:if="${oneDTO.typeOfInsurance} == ${oneString}" th:text="${oneDTO.variantInsurance}">
+                           </li>
+                        </ul>
                     </div>
-                  </div>
-                </ul>
-
-                <!-- th:if="${oneDTO.typeOfInsurance} == ${oneString}"
-                th:text="'polozka c: ' + ${state.index}" -->
-
+                </div>
                 <button type="button"><a th:href="@{'/insureds/addInsurance/' + '1'}">Přidat pojištění</a></button>
                 <button type="button"><a th:href="@{/insureds/}">Zpět</a></button>
 

@@ -81,6 +81,10 @@ public class InsuredController {
         List<InsuranceDTO> allInsuranceDTO = insuranceService.getAll();
         model.addAttribute("allUniqueInsuranceStrings", allUniqueInsuranceStrings);
         model.addAttribute("allInsuranceDTO", allInsuranceDTO);
+        // nenašel jsem jak přes thymeleaf iterovat dle dvou vlastností DTO kdy pro jednu chci zobrazit tlačítka k výběru
+        // (typ pojištění) a podle druhé doplnit kategorii a tu zobrazit až po zvolení konkrétního typu. Proto si zde posílám
+        // list Stringů s kategoriemi pojištění a při th:each jej porovnávám s aktuální hodnotou procházené vlastnosti a
+        // vypisuju odpovídající kategorie...
         return "pages/insureds/addInsurance";
     }
 
