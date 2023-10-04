@@ -73,8 +73,8 @@ public class InsuredController {
         redirectAttributes.addFlashAttribute("success", "Pojištěný vymazán.");
         return "redirect:/insureds/";
     }
-    @GetMapping("addInsurance/{insuredId}")
-    public String addInsuranceToInsured(@PathVariable long insuredId, Model model){
+    @GetMapping("chooseInsurance/{insuredId}")
+    public String chooseInsuranceForInsured(@PathVariable long insuredId, Model model){
         InsuredDTO insured = insuredService.getById(insuredId);
         model.addAttribute("insured", insured);
         List<String> allUniqueInsuranceStrings = insuranceService.getAllUnique();
@@ -85,8 +85,18 @@ public class InsuredController {
         // (typ pojištění) a podle druhé doplnit kategorii a tu zobrazit až po zvolení konkrétního typu. Proto si zde posílám
         // list Stringů s kategoriemi pojištění a při th:each jej porovnávám s aktuální hodnotou procházené vlastnosti a
         // vypisuju odpovídající kategorie...
+        return "pages/insureds/chooseInsurance";
+    }
+    @RequestMapping("addInsurance/{insuranceId}/{insuredId}")
+    public String addInsuranceToInsured (@PathVariable(value = "insuranceId") long insuranceId, @PathVariable(value = "insuredId") long insuredId, Model model){
+        System.out.println("Vybráno pojištění Id: " + insuranceId + " pro pojištěného Id: " + insuredId);
+        InsuredDTO insured = insuredService.getById(insuredId);
+        InsuranceDTO insurance = insuranceService.getById(insuranceId);
+        model.addAttribute("insurance", insurance);
+        model.addAttribute("insured",  insured);
         return "pages/insureds/addInsurance";
     }
+
 
     @ExceptionHandler({InsuredNotFoundException.class})
     public String handleInsuredNotFoundException(RedirectAttributes redirectAttributes){

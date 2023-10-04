@@ -144,6 +144,22 @@
             </div>
         </div>
 -->
+
+        <ul th:fragment="detailInsured" class="py-3 list-group">
+            <li class="list-group-item">
+                <h2 th:text="${insured.name} + ' ' + ${insured.surName}"></h2>
+                <div class="row">
+                    <span class="col-2" th:text="${insured.streetAndNumber}"></span>
+                    <span class="col-8" th:text="${insured.email}"></span>
+                </div>
+                <div class="row">
+                    <span class="col-2" th:text="${insured.city}"></span>
+                    <span class="col-8" th:text="${insured.phone}"></span>
+                </div>
+                <span th:text="${insured.zipCode}"></span>
+            </li>
+        </ul>
+        
         <footer th:fragment="footer" class="fixed-bottom">
             Vytvořil &copy;  Lorenc Patrik 2023
         </footer>

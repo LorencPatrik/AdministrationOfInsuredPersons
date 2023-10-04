@@ -10,35 +10,23 @@
                 <h1>Výpis pojištěného:</h1>
             </header>
             <section>
+                <ul th:replace="~{fragments/layout.html :: detailInsured}"></ul>
+                <h2>Zvolte si cenu odpovídající hodnotě plnění, kterou pro toto pojištění potřebujete:</h2>
                 <ul class="py-3 list-group">
                     <li class="list-group-item">
-                        <h2 th:text="${insured.name} + ' ' + ${insured.surName}"></h2>
-                        <div class="row">
-                            <span class="col-2" th:text="${insured.streetAndNumber}"></span>
-                            <span class="col-8" th:text="${insured.email}"></span>
+                        <h3 th:text="${insurance.typeOfInsurance}"></h3>
+                        <h3 th:text="${insurance.variantInsurance}"></h3>
+                        <div class="d-flex">
+                                <h4 class="col-4" th:text="'Cena pojištění od: ' + ${#numbers.formatInteger(insurance.priceFrom, 3, 'WHITESPACE')} + ',-'"></h4>
+                                <h4 class="col-4" th:text="'do: ' + ${#numbers.formatInteger(insurance.priceTo, 3, 'WHITESPACE')} + ',-'"></h4>
                         </div>
-                        <div class="row">
-                            <span class="col-2" th:text="${insured.city}"></span>
-                            <span class="col-8" th:text="${insured.phone}"></span>
+                        <div class="d-flex">
+                            <h4 class="col-4" th:text="'Hodnota plnění od: ' + ${#numbers.formatInteger(insurance.amountFrom, 5, 'WHITESPACE')} + ',-'"></h4>
+                            <h4 class="col-4" th:text="'do: ' + ${#numbers.formatInteger(insurance.amountTo, 5, 'WHITESPACE')} + ',-'"></h4>
                         </div>
-                        <span th:text="${insured.zipCode}"></span>
                     </li>
                 </ul>
-                <h1>Vyberte si druh a variantu pojištění:</h1>
-                <div class="accordion" th:each="oneString, state : ${allUniqueInsuranceStrings}" id="accordionMenu">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" th:text="${oneString}" data-bs-toggle="collapse" th:data-bs-target="'#collapseNo' + ${state.index}" aria-expanded="false" th:aria-controls="'collapseNo' + ${state.index}"></button>
-                        </h2>
-                        <ul th:id="'collapseNo' + ${state.index}" class="accordion-collapse collapse pt-3" data-bs-parent="#accordionMenu">
-                            <li class="accordion-body p-0" th:each="oneDTO : ${allInsuranceDTO}" th:if="${oneDTO.typeOfInsurance} == ${oneString}" th:text="${oneDTO.variantInsurance}">
-                           </li>
-                        </ul>
-                    </div>
-                </div>
-                <button type="button"><a th:href="@{'/insureds/addInsurance/' + '1'}">Přidat pojištění</a></button>
-                <button type="button"><a th:href="@{/insureds/}">Zpět</a></button>
-
+                <button class="mt-3" type="button"><a th:href="@{'/insureds/chooseInsurance/' + ${insured.insuredId}}">Zpět</a></button>
             </section>
         </article>
         <footer th:replace="~{fragments/layout.html :: footer}"></footer>

@@ -14,7 +14,7 @@
                     <li class="list-group-item list-group-item-action" th:each="allInsurance: ${allInsurance}"> <!-- insured každá jedna DTO: ${kolekce předaná přes model - její název v úvozovkách} -->
                         <div class="row">
                             <span class="col-2"><a th:href="@{'/insurance/' + ${allInsurance.insuranceId}}" th:text="${allInsurance.typeOfInsurance} + ', ' + ${allInsurance.variantInsurance}"></a></span>
-                            <span class="col-8" th:text="'nabízené plnění: ' + ${allInsurance.amountFrom} + ' - ' + ${allInsurance.amountTo}"></span>
+                            <span class="col-8" th:text="'nabízené plnění: ' + ${#numbers.formatInteger(allInsurance.amountFrom, 3, 'WHITESPACE')} + ' - ' + ${#numbers.formatInteger(allInsurance.amountTo, 5, 'WHITESPACE')}"></span>
                             <button class="col-1" type="button"><a th:href="@{/insurance/edit/} + ${allInsurance.insuranceId}">Editovat</a></button>
                             <button class="col-1" type="button"><a th:href="@{'/insurance/delete/' + ${allInsurance.insuranceId}}">Smazat</a></button>
                         </div>
