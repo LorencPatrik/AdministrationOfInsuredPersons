@@ -20,7 +20,11 @@ public class InsuranceEntity {
     @Column
     private int priceTo;
     @Column
+    private int enteredPrice;
+    @Column
     private int amountFrom;
     @Column
     private int amountTo;
+    @Column
+    private int enteredAmount;
 }

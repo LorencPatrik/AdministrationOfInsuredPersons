@@ -26,6 +26,8 @@ public class InsuredController {
     private InsuranceService insuranceService;
     @Autowired
     private InsuredMapper insuredMapper;
+    private boolean viewPriceEntry = true; // ovlivňuje zobrazení volby ceny jednotlivého pojištění nebo vypočtenou cenu dle zadání
+    private boolean showSummary = false; // a naopak ovlivňuje zobrazení souhrnu po zadání ceny pojištění
 
     @GetMapping("/")
     public String renderInsureds(Model model) {
@@ -89,11 +91,35 @@ public class InsuredController {
     }
     @RequestMapping("addInsurance/{insuranceId}/{insuredId}")
     public String addInsuranceToInsured (@PathVariable(value = "insuranceId") long insuranceId, @PathVariable(value = "insuredId") long insuredId, Model model){
-        System.out.println("Vybráno pojištění Id: " + insuranceId + " pro pojištěného Id: " + insuredId);
         InsuredDTO insured = insuredService.getById(insuredId);
         InsuranceDTO insurance = insuranceService.getById(insuranceId);
         model.addAttribute("insurance", insurance);
         model.addAttribute("insured",  insured);
+        model.addAttribute("viewPriceEntry", viewPriceEntry);
+        model.addAttribute("showSummary", showSummary);
+        return "pages/insureds/addInsurance";
+    }
+    @PostMapping("addInsurance/{insuranceId}/{insuredId}")
+    public String handleInsuranceToInsured (@PathVariable(value = "insuranceId") long insuranceId, @PathVariable(value = "insuredId")
+                                            long insuredId, Model model, int priceOrAmount, String radioButton){
+        InsuredDTO insured = insuredService.getById(insuredId);
+        InsuranceDTO insurance = insuranceService.getById(insuranceId);
+        model.addAttribute("insurance", insurance);
+        model.addAttribute("insured",  insured);
+        if (radioButton.equals("price") && (priceOrAmount < insurance.getPriceFrom() || priceOrAmount > insurance.getPriceTo())) {
+            model.addAttribute("error", "Price mimo rozsah. Prosím opravte");
+            return addInsuranceToInsured(insurance.getInsuranceId(), insured.getInsuredId(), model);
+        } else if (radioButton.equals("amount") && (priceOrAmount < insurance.getAmountFrom() || priceOrAmount > insurance.getAmountTo())) {
+            model.addAttribute("error", "Amount mimo rozsah. Prosím opravte");
+            return addInsuranceToInsured(insurance.getInsuranceId(), insured.getInsuredId(), model);
+        }
+        viewPriceEntry = false;
+        showSummary = true;
+        model.addAttribute("radioButton", radioButton);
+        model.addAttribute("enteredValue", priceOrAmount);
+        model.addAttribute("viewPriceEntry", viewPriceEntry);
+        model.addAttribute("showSummary", showSummary);
+
         return "pages/insureds/addInsurance";
     }
 

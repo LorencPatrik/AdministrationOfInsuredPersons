@@ -26,7 +26,31 @@
                         </div>
                     </li>
                 </ul>
-                <button class="mt-3" type="button"><a th:href="@{'/insureds/chooseInsurance/' + ${insured.insuredId}}">Zpět</a></button>
+                <form class="py-3 row" th:if="${viewPriceEntry}" method="post" th:action="@{/insureds/addInsurance/{insuranceId}/{insuredId}(insuranceId=${insurance.insuranceId}, insuredId=${insured.insuredId})}">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="RadioButton1" th:name="radioButton" value="price" checked>
+                        <label class="form-check-label" for="RadioButton1">Cena pojištění</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="RadioButton2" th:name="radioButton" value="amount">
+                        <label class="form-check-label" for="RadioButton2">Hodnota krytí</label>
+                    </div>
+                    <div class="col-2">
+                        <label for="PriceOrAmount" class="control-label">Cena nebo krytí</label>
+                        <input type="number" id="PriceOrAmount"  class="form-control" th:name="priceOrAmount"/>
+                        <div class="py-2 alert alert-danger" th:text="${error}" th:if="${error}"></div>
+                    </div>
+                    
+                    <button class="col-2" type="submit">Přepočítat</button>
+                </form>
+                <div class="py-3 d-flex" th:if="${showSummary}" method="post" th:action="@{/insureds/addInsurance/{insuranceId}/{insuredId}(insuranceId=${insurance.insuranceId}, insuredId=${insured.insuredId})}">
+                    <h4>Zadali jste&nbsp;</h4>
+                    <h4 th:if="${radioButton == 'price'}">cenu pojištění:&nbsp;</h4>
+                    <h4 th:if="${radioButton == 'amount'}">hodnotu krytí:&nbsp;</h4>
+                    <h4 th:text="${#numbers.formatInteger(enteredValue, 3, 'WHITESPACE')} + ',-'"></h4>
+
+                </div>
+
             </section>
         </article>
         <footer th:replace="~{fragments/layout.html :: footer}"></footer>

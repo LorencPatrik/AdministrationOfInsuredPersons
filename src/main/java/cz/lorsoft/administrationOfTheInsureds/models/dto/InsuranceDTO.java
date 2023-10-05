@@ -20,9 +20,16 @@ public class InsuranceDTO {
     private int priceFrom;
     @Positive(message = "Vyplňte cenu za pojištění do")
     private int priceTo;
+    @DecimalMin(value = "100", message = "Zadaná hodnota je příliš nízká")
+    @DecimalMax(value = "1000", message = "Zadaná hodnota je příliš vysoká")
+    private int enteredPrice = 200;
     @Positive(message = "Vyplňte hodnotu pojistného v případě vyplacení od")
     private int amountFrom;
     @Positive(message = "Vyplňte hodnotu pojistného v případě vyplacení do")
     private int amountTo;
+    @DecimalMin(value = "100", message = "Zadaná hodnota je příliš nízká")
+    @DecimalMax(value = "1000", message = "Zadaná hodnota je příliš vysoká")
+    private int enteredAmount = 200;
+
 
 }
